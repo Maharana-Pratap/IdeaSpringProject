@@ -1,0 +1,22 @@
+server:
+  port: 3333
+
+spring:
+  cloud:
+    function:
+      definition: dataProducer;dataProcessor;dataConsumer # give the method-name in seq (1.producer , 2.processor, 3.consumer)
+    stream:
+      bindings:
+        dataProcessor-in-0:  # source chainal name of processor
+          destination: processor-in
+        dataProcessor-out-0:
+          destination: processor-out
+        dataProducer-in-0:
+          destination: processor-out
+        dataProducer-out-0:
+          destination: producer-out
+        dataConsumer-in-0:
+          destination: producer-out
+
+
+
