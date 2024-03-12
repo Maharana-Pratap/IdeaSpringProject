@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: demo-mongo-db
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/userDatabase
+
+
+logging:
+  level:
+    web: debug
+    sql: error

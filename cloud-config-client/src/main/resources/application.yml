@@ -1,0 +1,19 @@
+server:
+  port: 1010
+
+spring:
+  config:
+    import: configserver:http://localhost:1919
+  main:
+    allow-circular-references: true
+  cloud:
+    config:
+      uri:
+        - http://localhost:1919
+      enabled: true
+
+
+auth:
+  demo:
+    loginurl: https://www.facebook.com/login
+    authurl: https://www.facebook.com/v12.0/dialog/auth

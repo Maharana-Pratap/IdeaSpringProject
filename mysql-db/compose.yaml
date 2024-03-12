@@ -1,0 +1,30 @@
+version: '5'
+
+services:
+  mysqldb:
+    image: mysql:8.0.27
+    #container_name: mysql_database
+    #ports:
+    #  - "3306:3306"
+    environment:
+      DATABASE_PORT: 3306
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: employee
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: root
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  spring-boot-app:
+    image: ideabootapp:latest
+    ports:
+      - "1000:8080"
+    depends_on:
+      - mysqldb
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/employee?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: root
+
+volumes:
+  mysql_data:
