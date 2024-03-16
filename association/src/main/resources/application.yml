@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: association
+
+  ############### DB Config ######################
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: premraj@1112
+    url: jdbc:mysql://localhost:3306/shopping
+  jpa:
+    hibernate:
+      ddl-auto: update
+    generate-ddl: true
+    show-sql: true
+    #properties:
+    #  hibernate:
+    #    dialect: org.hibernate.dialect.MySQL8Dialect
