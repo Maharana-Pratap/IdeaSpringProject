@@ -36,10 +36,12 @@ public class ProductService {
 
     private Integer getMaxIdFromProduct() {
         return productRepository.findAll().stream()
-                .sorted((p1,p2) -> p2.getProductId() - p1.getProductId())
-                .map(Product::getProductId)
-                .findFirst()
-                .get();
+                //.sorted((p1,p2) -> p2.getProductId() - p1.getProductId())
+                //.map(Product::getProductId)
+                //.findFirst();
+                .mapToInt(Product::getProductId)
+                .max()
+                .orElse(0);
     }
 
     public List<Product> reverseOrderProductRecords() {

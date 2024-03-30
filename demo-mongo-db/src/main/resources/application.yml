@@ -3,7 +3,7 @@ spring:
     name: demo-mongo-db
   data:
     mongodb:
-      uri: mongodb://localhost:27017/userDatabase
+      uri: mongodb://localhost:27017/shopping
 
 
 logging:
