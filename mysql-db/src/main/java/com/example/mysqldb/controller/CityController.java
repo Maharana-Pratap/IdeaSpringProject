@@ -16,4 +16,19 @@ public class CityController {
     public ResponseEntity<?> addNewCity(@RequestBody City city) {
         return ResponseEntity.ok(cityService.saveCity(city));
     }
+
+    @GetMapping("/")
+    public ResponseEntity<?> findAllCity() {
+        return ResponseEntity.ok(cityService.findAllCity());
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<?> updateCity(@RequestBody City city) {
+        return ResponseEntity.ok(cityService.updateCity(city));
+    }
+
+    @GetMapping("/rmCached")
+    public ResponseEntity<String> removeCache() {
+        return ResponseEntity.ok(cityService.removeAllCache());
+    }
 }
