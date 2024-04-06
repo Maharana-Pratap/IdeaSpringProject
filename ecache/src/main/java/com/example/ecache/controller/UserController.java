@@ -28,4 +28,9 @@ public class UserController {
     public ResponseEntity<?> userAdd(@RequestBody User user) {
         return ResponseEntity.ok(userService.addUser(user));
     }
+
+    @GetMapping("/removed")
+    public String removeCache() {
+        return userService.deleteAllCache();
+    }
 }

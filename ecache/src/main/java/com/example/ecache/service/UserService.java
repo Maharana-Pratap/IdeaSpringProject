@@ -1,11 +1,10 @@
 package com.example.ecache.service;
 
+import com.example.ecache.pojo.User;
 import lombok.extern.slf4j.Slf4j;
-
-//import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import com.example.ecache.pojo.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,6 +13,7 @@ import java.util.Objects;
 
 @Slf4j
 @Service
+//@CacheConfig(cacheNames = {"user_cache"})
 public class UserService {
 
     User u1 = User.builder().id(1)
@@ -47,5 +47,10 @@ public class UserService {
         return ulist.stream()
                 .sorted((u1, u2) -> u2.getId().compareTo(u1.getId()))
                 .toList();
+    }
+
+    @CacheEvict(value = "user_cache")
+    public String deleteAllCache() {
+        return "Delete all cached data...!";
     }
 }
