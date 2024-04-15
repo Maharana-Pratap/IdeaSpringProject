@@ -30,7 +30,6 @@ public class OrderController {
             return ResponseEntity.ok(order);
         }
         return ResponseEntity.badRequest()
-                .body("Nor Order Fournd");
-
+                .body("Nor Order Found");
     }
 }
