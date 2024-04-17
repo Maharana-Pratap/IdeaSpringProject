@@ -1,0 +1,19 @@
+spring:
+  zipkin:
+    base-url: http://127.0.0.1:9411/zipkin/
+  application:
+    name: school-student
+
+server:
+  port: 9876
+
+management:
+  tracing:
+    enabled: true
+    sampling:
+      probability: 1
+
+logging:
+  level:
+    root: warn
+    web: debug
