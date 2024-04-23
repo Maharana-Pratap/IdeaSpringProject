@@ -34,5 +34,4 @@ public class TeacherController {
         Student student = restTemplate.getForObject(url, Student.class);
         return ResponseEntity.ok(student);
     }
-
 }
