@@ -47,7 +47,6 @@ public class ConsumerService {
         InterviewEvent interview = new ObjectMapper().readValue(event, InterviewEvent.class);
         System.out.println("DTLData: " + interview.getData().getId() + ", " + topicName + ", " + offset);
     }
-
 }
 
 

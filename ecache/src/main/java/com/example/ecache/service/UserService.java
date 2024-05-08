@@ -32,7 +32,7 @@ public class UserService {
 
     @Cacheable(value = "user_cache", key = "#id", condition = "#id==2")
     public User userById(Integer id) throws IOException {
-        log.error("db call userById: " + id);
+        log.error("db call userById: ", id);
         return userList.stream()
                 .filter(record -> Objects.equals(record.getId(), id))
                 .findFirst()

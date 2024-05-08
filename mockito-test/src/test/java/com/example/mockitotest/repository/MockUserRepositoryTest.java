@@ -7,5 +7,4 @@ public class MockUserRepositoryTest {
     @MockBean
     private MockUserRepository userRepository;
 
-
 }
