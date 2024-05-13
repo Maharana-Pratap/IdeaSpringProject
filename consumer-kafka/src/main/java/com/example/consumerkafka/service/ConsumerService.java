@@ -36,7 +36,7 @@ public class ConsumerService {
     /**
      * Dead-Later-Topic handler method
      * which store missing record which is
-     * not stored by consumer with any reason
+     * not stored by consumer from any reason
      *
      * @param event
      */

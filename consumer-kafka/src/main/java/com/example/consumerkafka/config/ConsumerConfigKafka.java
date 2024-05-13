@@ -24,6 +24,12 @@ public class ConsumerConfigKafka {
         configPros.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
         configPros.put(ConsumerConfig.GROUP_ID_CONFIG, "emp-consumer-1");
         configPros.put(JsonDeserializer.TRUSTED_PACKAGES, "com.example.consumerkafka");
+        // commit the offset value using consumer
+        configPros.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG,false);
+        // if consumer reset any reason and start again then
+        // receiving the value from begning or start after previous offset
+        // ("earliest" or "latest")
+        configPros.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG,"earliest");
         return new DefaultKafkaConsumerFactory<>(configPros);
     }
 }

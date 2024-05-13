@@ -1,7 +1,6 @@
 package com.example.elk.service;
 
 import com.example.elk.dtos.User;
-import lombok.extern.log4j.Log4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

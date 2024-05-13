@@ -27,31 +27,40 @@ public class KafkaConfig {
     }
 
     @Bean
-    public ProducerFactory<String,Object> producerFactoryObject(){
+    public ProducerFactory<String, Object> producerFactoryObject() {
         Map<String, Object> configsProps = new HashMap<>();
         configsProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9092");
         configsProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer");
         configsProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, "org.springframework.kafka.support.serializer.JsonSerializer");
+        // waiting of broaker/leader confirmation
+        configsProps.put(ProducerConfig.ACKS_CONFIG, "all");
+        // avoid duplicate value to produce by producer
+        configsProps.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, true);
         //configsProps.put(JsonDeserializer.TRUSTED_PACKAGES, "com.example.kafkaproducer");
 
         return new DefaultKafkaProducerFactory<>(configsProps);
     }
 
     @Bean
-    public ProducerFactory<String,String> producerFactoryString(){
+    public ProducerFactory<String, String> producerFactoryString() {
         Map<String, Object> configsProps = new HashMap<>();
         configsProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9092");
         configsProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer");
         configsProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer");
+       // waiting of broaker/leader confirmation
+        configsProps.put(ProducerConfig.ACKS_CONFIG, "all");
+        // avoid duplicate value to produce by producer
+        configsProps.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, true);
         return new DefaultKafkaProducerFactory<>(configsProps);
     }
 
     @Bean
-    public KafkaTemplate<String,Object> kafkaTemplateObject(){
+    public KafkaTemplate<String, Object> kafkaTemplateObject() {
         return new KafkaTemplate<>(producerFactoryObject());
     }
+
     @Bean
-    public KafkaTemplate<String,String> kafkaTemplateString() {
-        return new KafkaTemplate<String,String>(producerFactoryString());
+    public KafkaTemplate<String, String> kafkaTemplateString() {
+        return new KafkaTemplate<String, String>(producerFactoryString());
     }
 }
