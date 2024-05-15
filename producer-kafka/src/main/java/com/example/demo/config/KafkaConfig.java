@@ -18,6 +18,7 @@ import java.util.Map;
 @EnableKafka
 public class KafkaConfig {
 
+    @Bean
     public NewTopic kafkaTopic() {
         return TopicBuilder.name("interview")
                 .partitions(2)
