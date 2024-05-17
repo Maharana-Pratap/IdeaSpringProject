@@ -37,6 +37,8 @@ public class KafkaConfig {
         configsProps.put(ProducerConfig.ACKS_CONFIG, "all");
         // avoid duplicate value to produce by producer
         configsProps.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, true);
+        // maintain the order/sequence of message to produce by producer
+        configsProps.put(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION, 1);
         //configsProps.put(JsonDeserializer.TRUSTED_PACKAGES, "com.example.kafkaproducer");
 
         return new DefaultKafkaProducerFactory<>(configsProps);
@@ -52,6 +54,8 @@ public class KafkaConfig {
         configsProps.put(ProducerConfig.ACKS_CONFIG, "all");
         // avoid duplicate value to produce by producer
         configsProps.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, true);
+        // maintain the order/sequence of message to produce by producer
+        configsProps.put(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION, 1);
         return new DefaultKafkaProducerFactory<>(configsProps);
     }
 
