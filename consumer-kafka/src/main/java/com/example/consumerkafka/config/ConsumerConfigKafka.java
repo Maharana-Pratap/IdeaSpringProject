@@ -30,7 +30,6 @@ public class ConsumerConfigKafka {
         // receiving the value from begning or start after previous offset
         // ("earliest" or "latest")
         configPros.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG,"earliest");
-        configPros.put(ConsumerConfig.max,"earliest");
         return new DefaultKafkaConsumerFactory<>(configPros);
     }
 }
