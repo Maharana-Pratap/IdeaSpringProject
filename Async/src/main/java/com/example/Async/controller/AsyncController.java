@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 @Slf4j
 @RestController
@@ -29,15 +30,19 @@ public class AsyncController {
     private PaymentService paymentService;
 
     @GetMapping("/order")
-    public CompletableFuture<?> asyncCallTest() {
-
-        //CompletableFuture.allOf() waiting the response till get response
-        log.info("order controller calling");
-        CompletableFuture.allOf(orderService.orderPlaced()).join();
+    public CompletableFuture<?> asyncCallTest() throws ExecutionException, InterruptedException {
 
         //CompletableFuture.allOf() waiting the response till get response
         log.info("payment controller calling");
         CompletableFuture.allOf(paymentService.payment()).join();
+
+        // get value from CompletableFuture service
+        String o = (String) paymentService.payment().get();
+        log.info("Return payment object{} "+o);
+
+        //CompletableFuture.allOf() waiting the response till get response
+        log.info("order controller calling");
+        CompletableFuture.allOf(orderService.orderPlaced()).join();
 
         //CompletableFuture.allOf() waiting the response till get response
         log.info("delivery controller calling");
