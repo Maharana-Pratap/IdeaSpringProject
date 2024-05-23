@@ -1,6 +1,5 @@
 package com.example.demo.config;
 
-import com.sun.source.tree.NewArrayTree;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.springframework.context.annotation.Bean;
