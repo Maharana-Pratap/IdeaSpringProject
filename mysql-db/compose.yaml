@@ -16,12 +16,14 @@ services:
       - mysql_data:/var/lib/mysql
 
   spring-boot-app:
-    image: ideabootapp:latest
+    #image: ideabootapp:latest
+    build: ./
     ports:
       - "1000:8080"
     depends_on:
       - mysqldb
     environment:
+      #SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/employee?createDatabaseIfNotExist=true
       SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/employee?createDatabaseIfNotExist=true
       SPRING_DATASOURCE_USERNAME: admin
       SPRING_DATASOURCE_PASSWORD: root
