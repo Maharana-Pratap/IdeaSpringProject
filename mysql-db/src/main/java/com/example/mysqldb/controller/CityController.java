@@ -1,6 +1,7 @@
 package com.example.mysqldb.controller;
 
 import com.example.mysqldb.models.City;
+import com.example.mysqldb.models.Parts;
 import com.example.mysqldb.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,7 @@ public class CityController {
         return ResponseEntity.ok(cityService.saveCity(city));
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<?> findAllCity() {
         return ResponseEntity.ok(cityService.findAllCity());
     }
@@ -30,5 +31,10 @@ public class CityController {
     @GetMapping("/rmCached")
     public ResponseEntity<String> removeCache() {
         return ResponseEntity.ok(cityService.removeAllCache());
+    }
+
+    @GetMapping("/{name}")
+    public City findByName(@PathVariable String name) {
+        return cityService.FindCityByName(name);
     }
 }

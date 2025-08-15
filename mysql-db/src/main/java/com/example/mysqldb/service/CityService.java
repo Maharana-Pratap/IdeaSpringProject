@@ -50,4 +50,8 @@ public class CityService {
     public String removeAllCache() {
         return "All City-cached removed";
     }
+
+    public City FindCityByName(String name) {
+       return cityRepository.findByName(name);
+    }
 }
