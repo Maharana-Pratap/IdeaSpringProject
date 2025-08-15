@@ -38,7 +38,7 @@ public class AsyncController {
 
         // get value from CompletableFuture service
         String o = (String) paymentService.payment().get();
-        log.info("Return payment object{} "+o);
+        log.info("Return payment object{} ",o);
 
         //CompletableFuture.allOf() waiting the response till get response
         log.info("order controller calling");

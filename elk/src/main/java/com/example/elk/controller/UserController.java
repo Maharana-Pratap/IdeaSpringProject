@@ -1,5 +1,6 @@
 package com.example.elk.controller;
 
+import com.example.elk.dtos.ElkTest;
 import com.example.elk.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 
 @RestController
@@ -15,6 +17,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private RestTemplate template;
 
     @GetMapping("/")
     public ResponseEntity<?> findAllUser() {
@@ -29,5 +34,19 @@ public class UserController {
     @GetMapping("/name/{name}")
     public ResponseEntity<?> findUserByName(@PathVariable String name) {
         return ResponseEntity.ok(userService.findByName(name));
+    }
+
+    @GetMapping("/elk")
+    public ResponseEntity<?> getAll() {
+        String url = "http://localhost:1010/elk";
+        ResponseEntity<ElkTest[]> elkTest = template.getForEntity(url, ElkTest[].class);
+        return ResponseEntity.ok(elkTest.getBody());
+    }
+
+    @GetMapping("/elk/{id}")
+    public ResponseEntity<?> getOne(@PathVariable Integer id) {
+        String url = "http://localhost:1010/elk/"+id;
+        ResponseEntity<ElkTest> elkTest = template.getForEntity(url, ElkTest.class);
+        return ResponseEntity.ok(elkTest.getBody());
     }
 }

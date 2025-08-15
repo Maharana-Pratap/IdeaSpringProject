@@ -5,6 +5,7 @@ import com.example.mockitotest.service.MockUserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -13,7 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
 
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -22,10 +23,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class MockUserControllerTest {
 
     @Autowired
-    //@Mock
+   // @Mock
     private MockMvc mockMvc;
 
-    @MockBean
+    @InjectMocks
+    private String abc = "";
+
+    @MockBean // ===> for Spring-boot app (Controller/Service). It is just clone/mock the object only and inject at runtime also
+    //@Mock //===> It is just clone/mock the object only but not to inject at runtime
+    //@InjectMocks //===> Non springBoot app, will work on variable not on object
     private MockUserService userService;
 
     private MockUser user;
@@ -55,6 +61,12 @@ public class MockUserControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(new ObjectMapper().writeValueAsString(user)))
                 .andExpect(status().isOk());
+
+        // verify userService.addUser() is called or not.
+        verify(userService).addUser(user);
+
+        // verify how many times userService.addUser() is called.
+        verify(userService,times(1)).addUser(user);
     }
 
     @Test
@@ -84,4 +96,12 @@ public class MockUserControllerTest {
                 .andExpect(jsonPath("$[1].name").value("pratap"));
     }
 
+    @Test
+    public void adduser_test() throws Exception {
+        when(userService.addUser(user)).thenReturn(user);
+        mockMvc.perform(post("/mock/user")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(new ObjectMapper().writeValueAsString(user)))
+                .andExpect(status().isOk());
+    }
 }

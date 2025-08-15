@@ -3,7 +3,6 @@ package com.example.demo.controller;
 import com.example.demo.dtos.Interview;
 import com.example.demo.event.InterviewEvent;
 import com.example.demo.service.InterviewService;
-import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.GetMapping;

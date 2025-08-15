@@ -30,7 +30,7 @@ public class ShoppingController {
     @GetMapping("/call")
     public void shoppingDetails() throws InterruptedException {
 
-        //CompletableFuture.allOf().Join() wait for all request complete
+        // CompletableFuture.allOf().Join() wait for all request complete
         // then return all response at the same time.
         CompletableFuture.allOf(catalogService.showCatalog()).join();
         CompletableFuture.allOf(itemService.itemPicked()).join();

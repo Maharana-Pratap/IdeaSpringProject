@@ -1,0 +1,7 @@
+spring:
+  data:
+    mongodb:
+      #host: localhost
+      #port: 2717
+      #database: emp_dbs
+      uri: mongodb://localhost:27017/emp_dbs
